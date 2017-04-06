@@ -1,5 +1,12 @@
-build:
-  image: golang:1.6.3
-  commands:
-    - go get
-    - go build
+pipeline:
+  build:
+    image: golang:1.6.3
+    commands:
+      - go get
+      - go build
+  publish:
+    image: harshals/demo-go-app
+    repo: harshals/demo-go-app
+    username: harshals
+    password: Unix_1234
+    tags: [ "drone.1", "99.9.0" ]
