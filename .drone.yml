@@ -1,11 +1,4 @@
 pipeline:
   docker:
     image: plugins/docker
-    repo: hub.docker.com/r/harshals/demo-go-app
-    registry: hub.docker.com
-    username: harshals
-    password: Unix_1234
     dockerfile: Dockerfile
-    tags:
-      - drone.1
-      - 99.9.9
