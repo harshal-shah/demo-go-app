@@ -2,8 +2,8 @@ pipeline:
   docker:
     image: plugins/docker
     dockerfile: Dockerfile
-    username: harshals
-    password: Unix_1234
+    username: ${DOCKER_USER}
+    password: ${DOCKER_PASSWORD}
     email: harshal@infracloud.io
     repo: harshals/demo-go-app
     tags: "drone.${DRONE_BUILD_NUMBER}"
