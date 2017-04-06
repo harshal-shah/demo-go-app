@@ -6,4 +6,4 @@ pipeline:
     password: Unix_1234
     email: harshal@infracloud.io
     repo: harshals/demo-go-app
-    tags: drone.1
+    tags: drone.$DRONE_BUILD_NUMBER
