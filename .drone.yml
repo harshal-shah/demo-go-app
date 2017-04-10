@@ -6,4 +6,4 @@ pipeline:
     password: ${DOCKER_PASSWORD}
     email: harshal@infracloud.io
     repo: harshals/demo-go-app
-    tags: "drone.${DRONE_BUILD_NUMBER}"
+    tags: "${DRONE_BRANCH}.${DRONE_BUILD_NUMBER}"
