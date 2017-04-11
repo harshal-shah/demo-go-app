@@ -1,0 +1,32 @@
+pipeline:
+  docker:
+    image: plugins/docker
+    dockerfile: Dockerfile
+    username: ${DOCKER_USER}
+    password: ${DOCKER_PASSWORD}
+    email: harshal@infracloud.io
+    repo: harshals/demo-go-app
+    tags: "${DRONE_BRANCH}.${DRONE_BUILD_NUMBER}"
+  deploy-prod:
+    image: quay.io/honestbee/drone-kubernetes
+    kubernetes_server: ${KUBE_SERVER}
+    kubernetes_token: ${KUBE_TOKEN}
+    namespace: demo-app
+    container: frontend
+    deployment: demo-app-prod
+    repo: harshals/demo-go-app
+    tag: "${DRONE_BRANCH}.${DRONE_BUILD_NUMBER}"
+    when:
+      branch: [ master ]
+  deploy-canary:
+    image: quay.io/honestbee/drone-kubernetes
+    kubernetes_server: ${KUBE_SERVER}
+    kubernetes_token: ${KUBE_TOKEN}
+    namespace: demo-app
+    container: frontend
+    deployment: demo-app-canary
+    repo: harshals/demo-go-app
+    tag: "${DRONE_BRANCH}.${DRONE_BUILD_NUMBER}"
+    when:
+      branch: [ canary ]
+
