@@ -14,5 +14,4 @@ pipeline:
     namespace: demo-app
     deployment: demo-app-prod
     repo: harshals/demo-go-app
-    container: demo-app-prod
     tag: "${DRONE_BRANCH}.${DRONE_BUILD_NUMBER}"
