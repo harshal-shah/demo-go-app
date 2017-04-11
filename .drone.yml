@@ -7,12 +7,26 @@ pipeline:
     email: harshal@infracloud.io
     repo: harshals/demo-go-app
     tags: "${DRONE_BRANCH}.${DRONE_BUILD_NUMBER}"
-  deploy:
+  deploy-prod:
     image: quay.io/honestbee/drone-kubernetes
-    kubernetes_server: https://104.154.70.149
-    kubernetes_token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlZmF1bHQtdG9rZW4tajJzZGYiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVmYXVsdCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjAzNGIyZmM1LTFlODktMTFlNy05ZjA0LTQyMDEwYTgwMDEzOCIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ.J-_2HJr0CTrr7f0Y21-Lg-5skNx7aS0aO4scSoqbA_qaUQiW37BRAbR5850bFz3OSkeOhj2y4hnyJvDTyE8A_m4hlhqxXeNfOzj19uRAouCwnI4kyF6zEWsdD1VOcJ-Ni0i7SxV1vuBE-vK9xHYRbZpEVhHXVGe4fH6kYAP-lwgMlLJZzn9aXto-9ToTmt6Cq9X2T94MxcJ1dpj47vNcZZ856JREM45qJaG-22zjtUUlK7-eViNZyeWXt8OqaTj6NGy201_kCN3r_VuqbcDAEPypVsxpCD98qAJ6wqUPPBnA5GvgBe5GS9usKfqNAoVdahbX_xy7WRddSX3LmJT51g
+    kubernetes_server: ${KUBE_SERVER}
+    kubernetes_token: ${KUBE_TOKEN}
     namespace: demo-app
     container: frontend
     deployment: demo-app-prod
     repo: harshals/demo-go-app
     tag: "${DRONE_BRANCH}.${DRONE_BUILD_NUMBER}"
+    when:
+      branch: [ master ]
+  deploy-canary:
+    image: quay.io/honestbee/drone-kubernetes
+    kubernetes_server: ${KUBE_SERVER}
+    kubernetes_token: ${KUBE_TOKEN}
+    namespace: demo-app
+    container: frontend
+    deployment: demo-app-canary
+    repo: harshals/demo-go-app
+    tag: "${DRONE_BRANCH}.${DRONE_BUILD_NUMBER}"
+    when:
+      branch: [ canary ]
+
