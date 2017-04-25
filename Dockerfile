@@ -1,10 +1,17 @@
-FROM golang:1.6.3-onbuild
+FROM golang:1.6.3-alpine
+
+RUN mkdir /app
+
+ADD . /app/
+
+WORKDIR /app
+
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 
 FROM alpine:latest
 
-RUN mkdir -p /go/bin
-WORKDIR /go/bin
+WORKDIR /root/
 
-COPY --from=0 /go/bin/app .
+COPY --from=0 /app/main .
 
-CMD ["./app"]
+CMD ["/root/main"]
