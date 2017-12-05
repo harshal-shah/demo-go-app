@@ -13,7 +13,7 @@ stage 'Push image to registry'
   sh("docker push ${imageTag}")
 
 stage 'Deploy'
-  sh("which kubectl")
+  sh("kubectl set image deployment/demo-app-${env.BRANCH_NAME} -n prod frontend=${imageTag} ")
 
 }
 
