@@ -4,11 +4,11 @@ node{
                 sh 'helm init --client-only --service-account=tiller'
         }
         stage('Dependency Build'){
-                sh 'helm dependency build ./demo-go-app'
+                sh 'helm dependency build ./helm-charts/demo-go-app'
         }
         stage('Deploy Chart'){
-                sh "helm status dev-demo 2>/dev/null || helm install --name dev-demo --namespace default -f ./dev_demo.yaml ./demo-go-app"
-                sh "helm upgrade dev-demo -f ./dev_demo.yaml ./demo-go-app"
+                sh "helm status dev-demo 2>/dev/null || helm install --name dev-demo --namespace default -f ./helm-charts/dev_demo.yaml ./helm-charts/demo-go-app"
+                sh "helm upgrade dev-demo -f ./helm-charts/dev_demo.yaml ./helm-charts/demo-go-app"
         }
 
 }
