@@ -13,4 +13,4 @@ maintainers:
 name: demo-go-app
 sources:
 - https://github.com/infracloudio/demo-go-app
-version: 0.0.6
+version: 0.0.7
