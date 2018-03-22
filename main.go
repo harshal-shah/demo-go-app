@@ -36,7 +36,7 @@ func newInstance() *Instance {
 	i.Version = version
 	return i
 }
-const version string = "1.6.6"
+const version string = "1.6.7"
  
 func main(){
 http.HandleFunc("/", indexHandler)
